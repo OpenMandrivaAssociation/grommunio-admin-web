@@ -36,7 +36,7 @@ echo "%{version}" >.version
 
 %build
 #export NODE_ENV=production
-%make_build YARN="yarn --offline"
+%make_build YARN="yarn --offline --frozen-lockfile --ignore-engines"
 
 # Replacement for postinstall.js:
 rm -rf public/tinymce
