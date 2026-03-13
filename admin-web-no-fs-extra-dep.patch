@@ -1,0 +1,18 @@
+diff -up admin-web-4.0.0/postinstall.js.omv~ admin-web-4.0.0/postinstall.js
+--- admin-web-4.0.0/postinstall.js.omv~	2026-03-13 20:26:34.328687488 +0100
++++ admin-web-4.0.0/postinstall.js	2026-03-13 20:27:09.248973751 +0100
+@@ -1,5 +1,10 @@
+-const fse = require('fs-extra');
+ const path = require('path');
++const fs = require('fs');
++const { execSync } = require('child_process');
++
+ const topDir = __dirname;
+-fse.emptyDirSync(path.join(topDir, 'public', 'tinymce'));
+-fse.copySync(path.join(topDir, 'node_modules', 'tinymce'), path.join(topDir, 'public', 'tinymce'), { overwrite: true });
+\ No newline at end of file
++const dest = path.join(topDir, 'public', 'tinymce');
++const src = path.join(topDir, 'node_modules', 'tinymce');
++
++fs.rmSync(dest, { recursive: true, force: true });
++fs.cpSync(src, dest, { recursive: true });
